@@ -10,11 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ArcadeDrive;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Tank_Drive;
+import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -30,8 +30,8 @@ public class RobotContainer {
   
   private final Tank_Drive m_Tank_Drive = new Tank_Drive();
   private final Joystick m_Joystick = new Joystick(0);
-
-
+  private final Hopper m_Hopper = new Hopper();
+  private final Intake m_Intake = new Intake();
 
 
   /**
@@ -51,6 +51,17 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    JoystickButton HopperUp = new JoystickButton(m_Joystick, 1);
+    HopperUp.whenPressed(new HopperUp(m_Hopper));
+
+    JoystickButton HopperDown = new JoystickButton(m_Joystick, 2);
+    HopperUp.whenPressed(new HopperDown(m_Hopper));
+    
+    JoystickButton IntakeIn = new JoystickButton(m_Joystick, 3);
+    HopperUp.whenPressed(new IntakeIn(m_Intake));
+
+    JoystickButton IntakeOut = new JoystickButton(m_Joystick, 4);
+    HopperUp.whenPressed(new IntakeOut(m_Intake));
   }
 
 

@@ -22,10 +22,10 @@ public class Tank_Drive extends SubsystemBase {
   /**
    * Creates a new Tank_Drive.
    */
-    final WPI_TalonSRX flDrive = new WPI_TalonSRX(Constants.flDrive);
-    final WPI_TalonSRX frDrive = new WPI_TalonSRX(Constants.frDrive);
-    final WPI_TalonSRX blDrive = new WPI_TalonSRX(Constants.blDrive);
-    final WPI_TalonSRX brDrive = new WPI_TalonSRX(Constants.brDrive);
+    final WPI_TalonSRX flDrive = new WPI_TalonSRX(Constants.DriveConstants.flDrive);
+    final WPI_TalonSRX frDrive = new WPI_TalonSRX(Constants.DriveConstants.frDrive);
+    final WPI_TalonSRX blDrive = new WPI_TalonSRX(Constants.DriveConstants.blDrive);
+    final WPI_TalonSRX brDrive = new WPI_TalonSRX(Constants.DriveConstants.brDrive);
 
     final DifferentialDrive _drive = new DifferentialDrive(flDrive, frDrive);
 
@@ -41,9 +41,9 @@ public class Tank_Drive extends SubsystemBase {
 
     }
 
-    public void teleopDrive(Joystick driveControl) {
-      double forward = driveControl.getRawAxis(1);
-      double turn = driveControl.getRawAxis(4);
+    public void teleopDrive(final Joystick driveControl) {
+    final double forward = driveControl.getRawAxis(1);
+    final double turn = driveControl.getRawAxis(4);
 
       _drive.arcadeDrive(forward, turn);
     }

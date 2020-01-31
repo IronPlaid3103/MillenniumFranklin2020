@@ -6,16 +6,28 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Gyro extends SubsystemBase {
-  private myGyro gyro;
-
+public class Hopper extends SubsystemBase {
   /**
-   * Creates a new Gyro.
+   * Creates a new Hopper.
    */
-  public Gyro() {
-    gyro = new myGyro(1);
+  private WPI_TalonSRX Hopper = new WPI_TalonSRX(7); //7 is port number
+
+  public Hopper() {
+    
+  }
+
+  public void HopperUp() {
+    Hopper.set(ControlMode.PercentOutput, 0.5);
+  }
+
+  public void HopperDown(){
+    Hopper.set(ControlMode.PercentOutput, -0.5);
   }
 
   @Override
