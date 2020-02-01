@@ -32,7 +32,7 @@ public class RobotContainer {
   private final Joystick m_Joystick = new Joystick(0);
   private final Hopper m_Hopper = new Hopper();
   private final Intake m_Intake = new Intake();
-
+  private final Shooter m_Shooter = new Shooter();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -62,6 +62,9 @@ public class RobotContainer {
 
     JoystickButton IntakeOut = new JoystickButton(m_Joystick, 4);
     HopperUp.whenPressed(new IntakeOut(m_Intake));
+
+    JoystickButton ShooterShoot = new JoystickButton(m_Joystick, 5);
+    ShooterShoot.whenPressed(new ShooterShoot(m_Shooter));
   }
 
 

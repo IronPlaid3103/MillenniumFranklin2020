@@ -28,4 +28,15 @@ public final class Constants {
     public static final class IntakeConstants{
         public static final int intakePort = 1;
     }
+
+    public static final class ShooterConstants{
+        public static final int shooterPort = 2;
+    }
+
+    public static final class ClimberConstants{
+        public static final int hookLeft = 3;
+        public static final int hookRight = 4;
+        public static final int winchLeft = 9;
+        public static final int winchRight = 10;
+    }
 }

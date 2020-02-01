@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,10 +24,10 @@ public class Tank_Drive extends SubsystemBase {
   /**
    * Creates a new Tank_Drive.
    */
-    final WPI_TalonSRX flDrive = new WPI_TalonSRX(Constants.DriveConstants.flDrive);
-    final WPI_TalonSRX frDrive = new WPI_TalonSRX(Constants.DriveConstants.frDrive);
-    final WPI_TalonSRX blDrive = new WPI_TalonSRX(Constants.DriveConstants.blDrive);
-    final WPI_TalonSRX brDrive = new WPI_TalonSRX(Constants.DriveConstants.brDrive);
+    final CANSparkMax flDrive = new CANSparkMax(Constants.DriveConstants.flDrive, MotorType.kBrushless);
+    final CANSparkMax frDrive = new CANSparkMax(Constants.DriveConstants.frDrive, MotorType.kBrushless);
+    final CANSparkMax blDrive = new CANSparkMax(Constants.DriveConstants.blDrive, MotorType.kBrushless);
+    final CANSparkMax brDrive = new CANSparkMax(Constants.DriveConstants.brDrive, MotorType.kBrushless);
 
     final DifferentialDrive _drive = new DifferentialDrive(flDrive, frDrive);
 

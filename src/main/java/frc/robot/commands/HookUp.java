@@ -8,17 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Hook;
 
-public class IntakeIn extends CommandBase {
+public class HookUp extends CommandBase {
   /**
-   * Creates a new Intake.
+   * Creates a new ClimberDown.
    */
-  private Intake _intake;
-  public IntakeIn(Intake intake) {
+  private Hook _hook;
+  public HookUp(Hook hook) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _intake = intake;
-    addRequirements(intake);
+    _hook = hook;
+    addRequirements(hook);
   }
 
   // Called when the command is initially scheduled.
@@ -29,12 +29,12 @@ public class IntakeIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    _intake.takeIntake();
+    _hook.HookUp();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(final boolean interrupted) {
+  public void end(boolean interrupted) {
   }
 
   // Returns true when the command should end.
