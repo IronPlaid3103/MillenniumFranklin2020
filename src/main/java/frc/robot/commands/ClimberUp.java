@@ -42,4 +42,7 @@ public class ClimberUp extends CommandBase {
   public boolean isFinished() {
     return false;
   }
+
+public static void whenPressed(ClimberUp climberUp) {
+}
 }

@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hook;
 
@@ -15,10 +16,10 @@ public class HookUp extends CommandBase {
    * Creates a new ClimberDown.
    */
   private Hook _hook;
-  public HookUp(Hook hook) {
+  public HookUp(Hook m_hookUp) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _hook = hook;
-    addRequirements(hook);
+    _hook = m_hookUp;
+    addRequirements(m_hookUp);
   }
 
   // Called when the command is initially scheduled.

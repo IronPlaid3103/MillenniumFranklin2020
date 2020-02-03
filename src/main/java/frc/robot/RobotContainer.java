@@ -24,15 +24,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   
   private final Tank_Drive m_Tank_Drive = new Tank_Drive();
   private final Joystick m_Joystick = new Joystick(0);
   private final Hopper m_Hopper = new Hopper();
   private final Intake m_Intake = new Intake();
   private final Shooter m_Shooter = new Shooter();
+  private final Climber m_ClimberDown = new Climber();
+  private final Climber m_ClimberUp = new Climber();
+  private final Hook m_hookUp = new Hook();
+  private final Hook m_hookDown = new Hook();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -51,20 +52,32 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton HopperUp = new JoystickButton(m_Joystick, 1);
+    final JoystickButton HopperUp = new JoystickButton(m_Joystick, 1);
     HopperUp.whenPressed(new HopperUp(m_Hopper));
 
-    JoystickButton HopperDown = new JoystickButton(m_Joystick, 2);
+    final JoystickButton HopperDown = new JoystickButton(m_Joystick, 2);
     HopperUp.whenPressed(new HopperDown(m_Hopper));
-    
-    JoystickButton IntakeIn = new JoystickButton(m_Joystick, 3);
+
+    final JoystickButton IntakeIn = new JoystickButton(m_Joystick, 3);
     HopperUp.whenPressed(new IntakeIn(m_Intake));
 
-    JoystickButton IntakeOut = new JoystickButton(m_Joystick, 4);
+    final JoystickButton IntakeOut = new JoystickButton(m_Joystick, 4);
     HopperUp.whenPressed(new IntakeOut(m_Intake));
 
-    JoystickButton ShooterShoot = new JoystickButton(m_Joystick, 5);
+    final JoystickButton ShooterShoot = new JoystickButton(m_Joystick, 5);
     ShooterShoot.whenPressed(new ShooterShoot(m_Shooter));
+
+    final JoystickButton ClimberDown = new JoystickButton(m_Joystick, 6);
+    ClimberDown.whenPressed(new ClimberDown(m_ClimberDown));
+
+    final JoystickButton ClmberUp = new JoystickButton(m_Joystick, 7);
+    ClimberUp.whenPressed(new ClimberUp(m_ClimberUp));
+
+    final JoystickButton HookUp = new JoystickButton(m_Joystick, 8);
+    HookUp.whenPressed(new HookUp(m_hookUp));
+
+    final JoystickButton HookDown = new JoystickButton(m_Joystick, 9);
+    HookDown.whenPressed(new HookDown(m_hookDown));
   }
 
 
@@ -74,7 +87,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    return null;
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    //return m_autoCommand;
   }
 }

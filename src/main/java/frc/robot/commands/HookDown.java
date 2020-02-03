@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hook;
 
@@ -15,10 +16,10 @@ public class HookDown extends CommandBase {
    * Creates a new HookDown.
    */
   private Hook _hook;
-  public HookDown(Hook hook) {
+  public HookDown(Hook m_hookDown) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _hook = hook;
-    addRequirements(hook);
+    _hook = m_hookDown;
+    addRequirements(m_hookDown);
   }
 
   // Called when the command is initially scheduled.
