@@ -10,16 +10,32 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Hopper extends SubsystemBase {
   /**
    * Creates a new Hopper.
    */
-  private WPI_TalonSRX Hopper = new WPI_TalonSRX(7); //7 is port number
+  private final WPI_TalonSRX Hopper = new WPI_TalonSRX(7); // 7 is port number
+  DigitalInput lineBreak = new DigitalInput(Constants.HopperConstants.lineBreak);
+  int counter = 0;
+  boolean lastState = false;
 
   public Hopper() {
     
+  }
+
+
+  public void countBalls(){
+    boolean sensorState = lineBreak.get();
+    if (!sensorState && lastState) {
+      counter ++;
+    }
+    SmartDashboard.putNumber("Amount of Balls", counter);
+    lastState = sensorState;
   }
 
   public void HopperUp() {

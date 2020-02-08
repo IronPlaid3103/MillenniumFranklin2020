@@ -39,4 +39,8 @@ public final class Constants {
         public static final int winchLeft = 9;
         public static final int winchRight = 10;
     }
+
+    public static final class HopperConstants{
+        public static final int lineBreak = 1;
+    }
 }
