@@ -8,13 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Hopper;
 
 public class LineBreakSensor extends CommandBase {
   /**
    * Creates a new LineBreakSensor.
    */
-  public LineBreakSensor() {
+  private Hopper _lineBreak;
+  public LineBreakSensor(Hopper lineBreak) {
     // Use addRequirements() here to declare subsystem dependencies.
+    _lineBreak = lineBreak;
+    addRequirements(lineBreak);
   }
 
   // Called when the command is initially scheduled.
@@ -25,6 +29,7 @@ public class LineBreakSensor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    _lineBreak.countBalls();
   }
 
   // Called once the command ends or is interrupted.

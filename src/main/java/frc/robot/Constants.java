@@ -41,6 +41,7 @@ public final class Constants {
     }
 
     public static final class HopperConstants{
-        public static final int lineBreak = 1;
+        public static final int upCount = 1;
+        public static final int downCount = 2;
     }
 }

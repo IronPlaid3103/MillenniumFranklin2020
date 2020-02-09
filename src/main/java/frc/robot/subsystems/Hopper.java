@@ -20,9 +20,11 @@ public class Hopper extends SubsystemBase {
    * Creates a new Hopper.
    */
   private final WPI_TalonSRX Hopper = new WPI_TalonSRX(7); // 7 is port number
-  DigitalInput lineBreak = new DigitalInput(Constants.HopperConstants.lineBreak);
+  DigitalInput upCount = new DigitalInput(Constants.HopperConstants.upCount);
+  DigitalInput downCount = new DigitalInput(Constants.HopperConstants.downCount);
   int counter = 0;
-  boolean lastState = false;
+  boolean lastBottomState = false;
+  boolean lastTopState = false;
 
   public Hopper() {
     
@@ -30,12 +32,17 @@ public class Hopper extends SubsystemBase {
 
 
   public void countBalls(){
-    boolean sensorState = lineBreak.get();
-    if (!sensorState && lastState) {
+    boolean bottomSensorState = upCount.get();
+    boolean topSensorState = downCount.get();
+    if (!bottomSensorState && lastBottomState) {
       counter ++;
     }
+    if (!topSensorState && lastTopState){
+      counter--;
+    }
     SmartDashboard.putNumber("Amount of Balls", counter);
-    lastState = sensorState;
+    lastBottomState = bottomSensorState;
+    lastTopState = topSensorState;
   }
 
   public void HopperUp() {
