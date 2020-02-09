@@ -10,6 +10,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -24,14 +25,14 @@ import frc.robot.subsystems.Tank_Drive;
  * project.
  */
 public class Robot extends TimedRobot {
+  public static Preferences preferences;
   public static RobotContainer m_RobotContainer;
   private Command m_autonomousCommand;
 
   // private RobotContainer m_RobotContainer;
-
   public static Tank_Drive kopchassis = new Tank_Drive();
   private WPI_TalonSRX _talon;
-  private Joystick _joystick; 
+  public static Joystick _joystick; 
   private Gyro _gyro;
   //private CanDevice _canDevice;
   public static IntakeIn _intake;
@@ -45,6 +46,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_RobotContainer = new RobotContainer();
+    preferences = Preferences.getInstance();
   }
 
   /**

@@ -55,4 +55,9 @@ public class Tank_Drive extends SubsystemBase {
     // This method will be called once per scheduler run
  
   }
+
+  public void limelightDrive(Joystick driver, double output) {
+    double forward = driver.getRawAxis(1);
+    _drive.arcadeDrive(forward, output);
+  }
 }
