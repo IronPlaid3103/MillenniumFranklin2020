@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.IntakeIn;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Tank_Drive;
 
 /**
@@ -26,16 +27,8 @@ import frc.robot.subsystems.Tank_Drive;
  */
 public class Robot extends TimedRobot {
   public static Preferences preferences;
-  public static RobotContainer m_RobotContainer;
+  private RobotContainer m_RobotContainer;
   private Command m_autonomousCommand;
-
-  // private RobotContainer m_RobotContainer;
-  public static Tank_Drive kopchassis = new Tank_Drive();
-  private WPI_TalonSRX _talon;
-  public static Joystick _joystick; 
-  private Gyro _gyro;
-  //private CanDevice _canDevice;
-  public static IntakeIn _intake;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -47,6 +40,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_RobotContainer = new RobotContainer();
     preferences = Preferences.getInstance();
+  
   }
 
   /**

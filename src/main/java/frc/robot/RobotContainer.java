@@ -34,6 +34,7 @@ public class RobotContainer {
   private final Climber m_ClimberUp = new Climber();
   private final Hook m_hookUp = new Hook();
   private final Hook m_hookDown = new Hook();
+  private final Camera m_camera = new Camera();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

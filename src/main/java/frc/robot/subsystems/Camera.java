@@ -25,6 +25,7 @@ public class Camera extends SubsystemBase {
   VideoSink videoSink2;
   
   public Camera() {
+    //Camera.getInstance().startAutomaticCapture();
     CameraServer cs = CameraServer.getInstance();
 
     try{
@@ -43,6 +44,9 @@ public class Camera extends SubsystemBase {
 
     upCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
     backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 176, 144, 30);
+
+    videoSink1.setSource(backCamera);
+    videoSink2.setSource(upCamera);
   }
 
   public void showCamera(){

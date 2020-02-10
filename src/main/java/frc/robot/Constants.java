@@ -19,10 +19,10 @@ public final class Constants {
 
 
     public static final class DriveConstants{
-        public static final int frDrive = 5;
-        public static final int flDrive = 7;
-        public static final int brDrive = 6;
-        public static final int blDrive = 8;
+        public static final int frDrive = 1;
+        public static final int flDrive = 2;
+        public static final int brDrive = 3;
+        public static final int blDrive = 4;
     }
 
     public static final class IntakeConstants{
