@@ -7,8 +7,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.EncoderType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -41,23 +45,33 @@ public class Tank_Drive extends SubsystemBase {
       blDrive.setInverted(false);
       brDrive.setInverted(false);
 
-    }
+    CANEncoder _endcoderLeft = new CANEncoder(flDrive);
+    CANEncoder _endcoderRight = new CANEncoder(frDrive);
+  }
 
-    public void teleopDrive(final Joystick driveControl) {
+  public void teleopDrive(final Joystick driveControl) {
     final double forward = driveControl.getRawAxis(1);
     final double turn = driveControl.getRawAxis(4);
 
-      _drive.arcadeDrive(forward, turn);
-    }
+    _drive.arcadeDrive(forward, turn);
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
- 
+
   }
 
-  public void limelightDrive(Joystick driver, double output) {
-    double forward = driver.getRawAxis(1);
+  public void limelightDrive(final Joystick driver, final double output) {
+    final double forward = driver.getRawAxis(1);
     _drive.arcadeDrive(forward, output);
+  }
+
+  public double getLeftEncoderPosition(){
+    return flDrive.getEncoder().getPosition();
+  }
+
+  public void autoMoveForward(){
+    _drive.arcadeDrive(.5, 0);
   }
 }

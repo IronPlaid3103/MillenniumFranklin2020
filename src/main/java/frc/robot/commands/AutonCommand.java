@@ -8,17 +8,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Camera;
 
-public class Cameras extends CommandBase {
+public class AutonCommand extends CommandBase {
   /**
-   * Creates a new Camera.
+   * Creates a new AutonCommand.
    */
-  private Camera _camera;
-  public Cameras(Camera camera) {
+  public AutonCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    _camera = camera;
-    addRequirements(camera);
+    
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +26,6 @@ public class Cameras extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //_camera.showCamera();
   }
 
   // Called once the command ends or is interrupted.

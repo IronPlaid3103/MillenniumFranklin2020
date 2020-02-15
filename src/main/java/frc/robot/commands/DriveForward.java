@@ -8,17 +8,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.Tank_Drive;
 
-public class Cameras extends CommandBase {
+public class DriveForward extends CommandBase {
   /**
-   * Creates a new Camera.
+   * Creates a new DriveForward.
    */
-  private Camera _camera;
-  public Cameras(Camera camera) {
+  private Tank_Drive tankDrive;
+  public DriveForward(Tank_Drive _tankDrive) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _camera = camera;
-    addRequirements(camera);
+    tankDrive = _tankDrive;
+    addRequirements(tankDrive);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +29,7 @@ public class Cameras extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //_camera.showCamera();
+    tankDrive.autoMoveForward();
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +40,7 @@ public class Cameras extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    double position = tankDrive.getLeftEncoderPosition();
+    return (position >= 500);
   }
 }

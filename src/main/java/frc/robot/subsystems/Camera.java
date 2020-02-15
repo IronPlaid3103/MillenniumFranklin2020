@@ -16,50 +16,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Camera extends SubsystemBase {
-  /**
-   * Creates a new CameraBack.
-   */
-  UsbCamera backCamera;
   UsbCamera upCamera;
+  UsbCamera backCamera;
   VideoSink videoSink1;
   VideoSink videoSink2;
-  
-  public Camera() {
-    //Camera.getInstance().startAutomaticCapture();
-    CameraServer cs = CameraServer.getInstance();
 
-    try{
-      backCamera = cs.startAutomaticCapture("backCamera", 0);
-      backCamera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    } catch (Exception ex){
+  public Camera(){
+  backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 0);
+  backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
+  videoSink1 = CameraServer.getInstance().getVideo();
+  videoSink1.setSource(backCamera);
+  videoSink1.getProperty("compression").set(70);
 
-    }
+  upCamera = CameraServer.getInstance().startAutomaticCapture("upCamera", 1);
+  upCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
+  videoSink2 = CameraServer.getInstance().getVideo();
+  videoSink2.setSource(upCamera);
+  videoSink2.getProperty("compression").set(70);
 
-    try{
-      upCamera = cs.startAutomaticCapture("upCamera", 1);
-      upCamera.setConnectionStrategy(VideoSource.ConnectionStrategy.kKeepOpen);
-    } catch (Exception ex){
-
-    }
-
-    upCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
-    backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 176, 144, 30);
-
-    videoSink1.setSource(backCamera);
-    videoSink2.setSource(upCamera);
-  }
-
-  public void showCamera(){
-    videoSink1.setSource(backCamera);
-    SmartDashboard.putString("Camera", "Back");
-
-    videoSink2.setSource(upCamera);
-    SmartDashboard.putString("Camera", "Up");
-  }
-
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
-}
+}}

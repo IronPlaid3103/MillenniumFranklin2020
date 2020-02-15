@@ -13,34 +13,42 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
+import frc.robot.commands.AutonCommand;
+import frc.robot.commands.DriveForward;
 import frc.robot.commands.IntakeIn;
 import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Tank_Drive;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the TimedRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
+  Command autonomousCommand;
   public static Preferences preferences;
   private RobotContainer m_RobotContainer;
   private Command m_autonomousCommand;
 
+
   /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
+   * This function is run when the robot is first started up and should be used
+   * for any initialization code.
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // Instantiate our RobotContainer. This will perform all our button bindings,
+    // and put our
     // autonomous chooser on the dashboard.
     m_RobotContainer = new RobotContainer();
     preferences = Preferences.getInstance();
-  
+    autonomousCommand = new DriveForward(m_RobotContainer.getTank_Drive());
   }
 
   /**
@@ -94,6 +102,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    //ScheduleCommand(m_autonomousCommand);
+    //TODO: Fix how to do this
+    CommandScheduler.getInstance().run();
   }
 
   @Override

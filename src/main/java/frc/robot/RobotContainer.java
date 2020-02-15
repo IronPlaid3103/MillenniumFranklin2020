@@ -35,18 +35,24 @@ public class RobotContainer {
   private final Hook m_hookUp = new Hook();
   private final Hook m_hookDown = new Hook();
   private final Camera m_camera = new Camera();
+  private final AutonCommand m_autonCommand = new AutonCommand();
 
   /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
+   * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    
+
+    m_Tank_Drive.configDrive();
     m_Tank_Drive.setDefaultCommand(new ArcadeDrive(m_Tank_Drive, m_Joystick));
   }
 
-  /**
+  public Tank_Drive getTank_Drive(){
+    return m_Tank_Drive;
+  }
+
+/**
    * Use this method to define your button->command mappings.  Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
@@ -81,14 +87,13 @@ public class RobotContainer {
     HookDown.whenPressed(new HookDown(m_hookDown));
   }
 
-
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    return m_autonCommand;
     // An ExampleCommand will run in autonomous
     //return m_autoCommand;
   }
