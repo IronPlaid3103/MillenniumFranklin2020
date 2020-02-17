@@ -9,11 +9,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase {
   /**
@@ -32,9 +30,10 @@ public class Limelight extends SubsystemBase {
 
   public void initializePID(){
     error_sum = 0;
-    kP = Robot.preferences.getDouble("Limelight.kP", 0.0);
-    kI = Robot.preferences.getDouble("Limelight.kI", 0.0);
-    kD = Robot.preferences.getDouble("Limelight.kD", 0.0);
+    //TODO: figure out how to access preferences while still keeping private
+    // kP = Robot.preferences.getDouble("Limelight.kP", 0.0);
+    // kI = Robot.preferences.getDouble("Limelight.kI", 0.0);
+    // kD = Robot.preferences.getDouble("Limelight.kD", 0.0);
   }
   
   public void lightOn(){

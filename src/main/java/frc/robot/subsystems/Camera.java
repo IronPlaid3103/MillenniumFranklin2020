@@ -10,9 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode;
 import edu.wpi.cscore.VideoSink;
-import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Camera extends SubsystemBase {
@@ -21,17 +19,18 @@ public class Camera extends SubsystemBase {
   VideoSink videoSink1;
   VideoSink videoSink2;
 
-  public Camera(){
-  backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 0);
-  backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
-  videoSink1 = CameraServer.getInstance().getVideo();
-  videoSink1.setSource(backCamera);
-  videoSink1.getProperty("compression").set(70);
+  public Camera() {
+    backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 0);
+    backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
+    videoSink1 = CameraServer.getInstance().getVideo();
+    videoSink1.setSource(backCamera);
+    videoSink1.getProperty("compression").set(70);
 
-  upCamera = CameraServer.getInstance().startAutomaticCapture("upCamera", 1);
-  upCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
-  videoSink2 = CameraServer.getInstance().getVideo();
-  videoSink2.setSource(upCamera);
-  videoSink2.getProperty("compression").set(70);
+    upCamera = CameraServer.getInstance().startAutomaticCapture("upCamera", 1);
+    upCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
+    videoSink2 = CameraServer.getInstance().getVideo();
+    videoSink2.setSource(upCamera);
+    videoSink2.getProperty("compression").set(70);
 
-}}
+  }
+}

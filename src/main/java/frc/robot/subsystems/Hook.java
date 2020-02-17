@@ -19,15 +19,17 @@ public class Hook extends SubsystemBase {
    */
   private TalonSRX hookLeft = new TalonSRX(Constants.ClimberConstants.hookLeft);
   private TalonSRX hookRight = new TalonSRX(Constants.ClimberConstants.hookRight);
+
   public Hook() {
 
   }
 
-  public void HookUp(){
+  public void hookUp() {
     hookLeft.set(ControlMode.PercentOutput, 0.5);
     hookRight.set(ControlMode.PercentOutput, 0.5);
   }
-  public void HookDown(){
+
+  public void hookDown() {
     hookLeft.set(ControlMode.PercentOutput, -0.5);
     hookRight.set(ControlMode.PercentOutput, -0.5);
   }

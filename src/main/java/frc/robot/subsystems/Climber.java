@@ -19,20 +19,21 @@ public class Climber extends SubsystemBase {
    */
   private TalonSRX winchLeft = new TalonSRX(Constants.ClimberConstants.winchLeft);
   private TalonSRX winchRight = new TalonSRX(Constants.ClimberConstants.winchRight);
+
   public Climber() {
 
   }
 
-  public void follow(){
-    //if want to follow put in here
+  public void follow() {
+    // if want to follow put in here
   }
 
-  public void ClimberDown(){
+  public void climberDown() {
     winchLeft.set(ControlMode.PercentOutput, -0.5);
     winchRight.set(ControlMode.PercentOutput, -0.5);
   }
 
-  public void ClimberUp(){
+  public void climberUp() {
     winchLeft.set(ControlMode.PercentOutput, 0.5);
     winchRight.set(ControlMode.PercentOutput, 0.5);
   }

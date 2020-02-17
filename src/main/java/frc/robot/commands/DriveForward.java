@@ -14,10 +14,10 @@ public class DriveForward extends CommandBase {
   /**
    * Creates a new DriveForward.
    */
-  private Tank_Drive tankDrive;
-  public DriveForward(Tank_Drive _tankDrive) {
+  private Tank_Drive _tankDrive;
+  public DriveForward(Tank_Drive tankDrive) {
     // Use addRequirements() here to declare subsystem dependencies.
-    tankDrive = _tankDrive;
+    _tankDrive = tankDrive;
     addRequirements(tankDrive);
   }
 
@@ -29,7 +29,7 @@ public class DriveForward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    tankDrive.autoMoveForward();
+    _tankDrive.autoMoveForward();
   }
 
   // Called once the command ends or is interrupted.
@@ -40,7 +40,7 @@ public class DriveForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double position = tankDrive.getLeftEncoderPosition();
+    double position = _tankDrive.getRightEncoderPosition();
     return (position >= 500);
   }
 }

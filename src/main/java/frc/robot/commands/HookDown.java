@@ -7,7 +7,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hook;
 
@@ -16,10 +15,10 @@ public class HookDown extends CommandBase {
    * Creates a new HookDown.
    */
   private Hook _hook;
-  public HookDown(Hook m_hookDown) {
+  public HookDown(Hook hook) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _hook = m_hookDown;
-    addRequirements(m_hookDown);
+    _hook = hook;
+    addRequirements(hook);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +29,7 @@ public class HookDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    _hook.HookDown();
+    _hook.hookDown();
   }
 
   // Called once the command ends or is interrupted.

@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -25,17 +24,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   
-  private final Tank_Drive m_Tank_Drive = new Tank_Drive();
-  private final Joystick m_Joystick = new Joystick(0);
-  private final Hopper m_Hopper = new Hopper();
-  private final Intake m_Intake = new Intake();
-  private final Shooter m_Shooter = new Shooter();
-  private final Climber m_ClimberDown = new Climber();
-  private final Climber m_ClimberUp = new Climber();
-  private final Hook m_hookUp = new Hook();
-  private final Hook m_hookDown = new Hook();
-  private final Camera m_camera = new Camera();
-  private final AutonCommand m_autonCommand = new AutonCommand();
+  private final Tank_Drive _tank_Drive = new Tank_Drive();
+  private final Joystick _joystick = new Joystick(0);
+  private final Hopper _hopper = new Hopper();
+  private final Intake _intake = new Intake();
+  private final Shooter _shooter = new Shooter();
+  private final Climber _climber = new Climber();
+  private final Hook _hook = new Hook();
+  private final Camera _camera = new Camera();
+  private final AutonCommand _autonCommand = new AutonCommand();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -44,12 +41,12 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    m_Tank_Drive.configDrive();
-    m_Tank_Drive.setDefaultCommand(new ArcadeDrive(m_Tank_Drive, m_Joystick));
+    _tank_Drive.configDrive();
+    _tank_Drive.setDefaultCommand(new ArcadeDrive(_tank_Drive, _joystick));
   }
 
   public Tank_Drive getTank_Drive(){
-    return m_Tank_Drive;
+    return _tank_Drive;
   }
 
 /**
@@ -59,32 +56,32 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    final JoystickButton HopperUp = new JoystickButton(m_Joystick, 1);
-    HopperUp.whenPressed(new HopperUp(m_Hopper));
+    final JoystickButton hopperUp = new JoystickButton(_joystick, Constants.JoystickConstants.A);
+    hopperUp.whenPressed(new HopperUp(_hopper));
 
-    final JoystickButton HopperDown = new JoystickButton(m_Joystick, 2);
-    HopperUp.whenPressed(new HopperDown(m_Hopper));
+    final JoystickButton hopperDown = new JoystickButton(_joystick, Constants.JoystickConstants.B);
+    hopperDown.whenPressed(new HopperDown(_hopper));
 
-    final JoystickButton IntakeIn = new JoystickButton(m_Joystick, 3);
-    HopperUp.whenPressed(new IntakeIn(m_Intake));
+    final JoystickButton intakeIn = new JoystickButton(_joystick, Constants.JoystickConstants.X);
+    intakeIn.whenPressed(new IntakeIn(_intake));
 
-    final JoystickButton IntakeOut = new JoystickButton(m_Joystick, 4);
-    HopperUp.whenPressed(new IntakeOut(m_Intake));
+    final JoystickButton intakeOut = new JoystickButton(_joystick, Constants.JoystickConstants.Y);
+    intakeOut.whenPressed(new IntakeOut(_intake));
 
-    final JoystickButton ShooterShoot = new JoystickButton(m_Joystick, 5);
-    ShooterShoot.whenPressed(new ShooterShoot(m_Shooter));
+    final JoystickButton shooterShoot = new JoystickButton(_joystick, Constants.JoystickConstants.BUMPER_LEFT);
+    shooterShoot.whenPressed(new ShooterShoot(_shooter));
 
-    final JoystickButton ClimberDown = new JoystickButton(m_Joystick, 6);
-    ClimberDown.whenPressed(new ClimberDown(m_ClimberDown));
+    final JoystickButton climberDown = new JoystickButton(_joystick, Constants.JoystickConstants.BUMPER_RIGHT);
+    climberDown.whenPressed(new ClimberDown(_climber));
 
-    final JoystickButton ClmberUp = new JoystickButton(m_Joystick, 7);
-    ClimberUp.whenPressed(new ClimberUp(m_ClimberUp));
+    final JoystickButton climberUp = new JoystickButton(_joystick, Constants.JoystickConstants.LOGO_LEFT);
+    climberUp.whenPressed(new ClimberUp(_climber));
 
-    final JoystickButton HookUp = new JoystickButton(m_Joystick, 8);
-    HookUp.whenPressed(new HookUp(m_hookUp));
+    final JoystickButton hookUp = new JoystickButton(_joystick, Constants.JoystickConstants.LEFT_STICK_BUTTON);
+    hookUp.whenPressed(new HookUp(_hook));
 
-    final JoystickButton HookDown = new JoystickButton(m_Joystick, 9);
-    HookDown.whenPressed(new HookDown(m_hookDown));
+    final JoystickButton hookDown = new JoystickButton(_joystick, Constants.JoystickConstants.RIGHT_STICK_BUTTON);
+    hookDown.whenPressed(new HookDown(_hook));
   }
 
   /**
@@ -93,7 +90,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return m_autonCommand;
+    return _autonCommand;
     // An ExampleCommand will run in autonomous
     //return m_autoCommand;
   }

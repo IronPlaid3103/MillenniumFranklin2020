@@ -17,14 +17,14 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  private WPI_TalonSRX _shooter = new WPI_TalonSRX(Constants.ShooterConstants.shooterPort);
+  private WPI_TalonSRX shooter = new WPI_TalonSRX(Constants.ShooterConstants.shooterPort);
 
   public Shooter() {
 
   }
 
   public void shoot(){
-    _shooter.set(ControlMode.PercentOutput,0.5);
+    shooter.set(ControlMode.PercentOutput,0.5);
 
   }
 
