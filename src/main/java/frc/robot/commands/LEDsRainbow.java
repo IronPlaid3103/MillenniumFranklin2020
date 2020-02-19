@@ -8,28 +8,29 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Hook;
+import frc.robot.subsystems.LEDs;
+import frc.robot.subsystems.LEDs.LED_MODE;
 
-public class HookUp extends CommandBase {
+public class LEDsRainbow extends CommandBase {
   /**
-   * Creates a new ClimberDown.
+   * Creates a new LEDsRainbow.
    */
-  private Hook _hook;
-  public HookUp(Hook hook) {
+  private LEDs _led;
+  public LEDsRainbow(LEDs led) {
     // Use addRequirements() here to declare subsystem dependencies.
-    _hook = hook;
-    addRequirements(hook);
+    _led = led;
+    addRequirements(led);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    _led.setMode(LED_MODE.Rainbow);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    _hook.hookUp();
   }
 
   // Called once the command ends or is interrupted.

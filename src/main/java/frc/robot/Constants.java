@@ -38,6 +38,7 @@ public final class Constants {
         public static final int hookRight = 4;
         public static final int winchLeft = 9;
         public static final int winchRight = 10;
+        public static final double winchPower = .5;
     }
 
     public static final class HopperConstants{

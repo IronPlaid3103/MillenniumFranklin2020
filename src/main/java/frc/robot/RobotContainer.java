@@ -25,12 +25,12 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   
   private final Tank_Drive _tank_Drive = new Tank_Drive();
-  private final Joystick _joystick = new Joystick(0);
+  private final Joystick _driver = new Joystick(0);
+  private final Joystick _operator = new Joystick(1);
   private final Hopper _hopper = new Hopper();
   private final Intake _intake = new Intake();
   private final Shooter _shooter = new Shooter();
   private final Climber _climber = new Climber();
-  private final Hook _hook = new Hook();
   private final Camera _camera = new Camera();
   private final AutonCommand _autonCommand = new AutonCommand();
 
@@ -42,7 +42,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     _tank_Drive.configDrive();
-    _tank_Drive.setDefaultCommand(new ArcadeDrive(_tank_Drive, _joystick));
+    _tank_Drive.setDefaultCommand(new ArcadeDrive(_tank_Drive, _driver));
   }
 
   public Tank_Drive getTank_Drive(){
@@ -56,32 +56,26 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    final JoystickButton hopperUp = new JoystickButton(_joystick, Constants.JoystickConstants.A);
+    final JoystickButton hopperUp = new JoystickButton(_operator, Constants.JoystickConstants.Y);
     hopperUp.whenPressed(new HopperUp(_hopper));
 
-    final JoystickButton hopperDown = new JoystickButton(_joystick, Constants.JoystickConstants.B);
+    final JoystickButton hopperDown = new JoystickButton(_operator, Constants.JoystickConstants.A);
     hopperDown.whenPressed(new HopperDown(_hopper));
 
-    final JoystickButton intakeIn = new JoystickButton(_joystick, Constants.JoystickConstants.X);
+    final JoystickButton intakeIn = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT);
     intakeIn.whenPressed(new IntakeIn(_intake));
 
-    final JoystickButton intakeOut = new JoystickButton(_joystick, Constants.JoystickConstants.Y);
+    final JoystickButton intakeOut = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT);
     intakeOut.whenPressed(new IntakeOut(_intake));
 
-    final JoystickButton shooterShoot = new JoystickButton(_joystick, Constants.JoystickConstants.BUMPER_LEFT);
+    final JoystickButton shooterShoot = new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT);
     shooterShoot.whenPressed(new ShooterShoot(_shooter));
 
-    final JoystickButton climberDown = new JoystickButton(_joystick, Constants.JoystickConstants.BUMPER_RIGHT);
+    final JoystickButton climberDown = new JoystickButton(_operator, Constants.JoystickConstants.X);
     climberDown.whenPressed(new ClimberDown(_climber));
 
-    final JoystickButton climberUp = new JoystickButton(_joystick, Constants.JoystickConstants.LOGO_LEFT);
+    final JoystickButton climberUp = new JoystickButton(_operator, Constants.JoystickConstants.B);
     climberUp.whenPressed(new ClimberUp(_climber));
-
-    final JoystickButton hookUp = new JoystickButton(_joystick, Constants.JoystickConstants.LEFT_STICK_BUTTON);
-    hookUp.whenPressed(new HookUp(_hook));
-
-    final JoystickButton hookDown = new JoystickButton(_joystick, Constants.JoystickConstants.RIGHT_STICK_BUTTON);
-    hookDown.whenPressed(new HookDown(_hook));
   }
 
   /**

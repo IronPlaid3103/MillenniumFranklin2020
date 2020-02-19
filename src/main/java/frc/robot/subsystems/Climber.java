@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,8 +19,8 @@ public class Climber extends SubsystemBase {
   /**
    * Creates a new Climber.
    */
-  private TalonSRX winchLeft = new TalonSRX(Constants.ClimberConstants.winchLeft);
-  private TalonSRX winchRight = new TalonSRX(Constants.ClimberConstants.winchRight);
+  private CANSparkMax winchLeft = new CANSparkMax(Constants.ClimberConstants.winchLeft, MotorType.kBrushless);
+  private CANSparkMax winchRight = new CANSparkMax(Constants.ClimberConstants.winchRight, MotorType.kBrushless);
 
   public Climber() {
 
@@ -29,13 +31,13 @@ public class Climber extends SubsystemBase {
   }
 
   public void climberDown() {
-    winchLeft.set(ControlMode.PercentOutput, -0.5);
-    winchRight.set(ControlMode.PercentOutput, -0.5);
+    winchLeft.set(Constants.ClimberConstants.winchPower);
+    winchRight.set(Constants.ClimberConstants.winchPower);
   }
 
   public void climberUp() {
-    winchLeft.set(ControlMode.PercentOutput, 0.5);
-    winchRight.set(ControlMode.PercentOutput, 0.5);
+    winchLeft.set(Constants.ClimberConstants.winchPower);
+    winchRight.set(Constants.ClimberConstants.winchPower);
   }
 
   @Override
