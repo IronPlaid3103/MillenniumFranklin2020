@@ -60,7 +60,7 @@ public class Tank_Drive extends SubsystemBase {
     final double turn = driveControl.getRawAxis(JoystickConstants.RIGHT_STICK_X);
 
     // _drive.arcadeDrive(forward, turn);
-    _drive.curvatureDrive(forward, turn, forward == 0); //reccomended instead of arcade drive to make turns wider
+    _drive.curvatureDrive(forward, turn, Math.abs(forward)<= .02); //reccomended instead of arcade drive to make turns wider
   }
 
   @Override

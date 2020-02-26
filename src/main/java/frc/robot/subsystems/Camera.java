@@ -20,11 +20,11 @@ public class Camera extends SubsystemBase {
   VideoSink videoSink2;
 
   public Camera() {
-    backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 0);
-    backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
-    videoSink1 = CameraServer.getInstance().getVideo();
-    videoSink1.setSource(backCamera);
-    videoSink1.getProperty("compression").set(70);
+    // backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 0);
+    // backCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);
+    // videoSink1 = CameraServer.getInstance().getVideo();
+    // videoSink1.setSource(backCamera);
+    // videoSink1.getProperty("compression").set(70);
 
     upCamera = CameraServer.getInstance().startAutomaticCapture("upCamera", 1);
     upCamera.setVideoMode(VideoMode.PixelFormat.kMJPEG, 320, 240, 30);

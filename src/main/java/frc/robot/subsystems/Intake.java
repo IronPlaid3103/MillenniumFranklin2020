@@ -23,12 +23,12 @@ public class Intake extends SubsystemBase {
   }
 
   public void takeIntake(){
-    intake.set(ControlMode.PercentOutput, 0.5);
+    intake.set(ControlMode.PercentOutput, Constants.IntakeConstants.intakeInPower);
   }
 
 
   public void letGoIntake() {
-    intake.set(ControlMode.PercentOutput, -0.5);
+    intake.set(ControlMode.PercentOutput, Constants.IntakeConstants.intakeOutPower);
   }
 
 

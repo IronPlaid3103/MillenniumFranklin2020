@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,29 +19,50 @@ public class Climber extends SubsystemBase {
   /**
    * Creates a new Climber.
    */
-  private CANSparkMax winchLeft = new CANSparkMax(Constants.ClimberConstants.winchLeft, MotorType.kBrushless);
-  private CANSparkMax winchRight = new CANSparkMax(Constants.ClimberConstants.winchRight, MotorType.kBrushless);
+  private final CANSparkMax _winch = new CANSparkMax(Constants.ClimberConstants.winch, MotorType.kBrushless);
+  private double _powerFast = Constants.ClimberConstants.defaultPowerFast;
+  private double _powerSlow = Constants.ClimberConstants.defaultPowerSlow;
 
   public Climber() {
-
+    setDefaultCommand(new InstantCommand(this::motorOff));
   }
 
-  public void follow() {
-    // if want to follow put in here
+  public void climbFast() {
+    _winch.set(_powerFast);
   }
 
-  public void climberDown() {
-    winchLeft.set(Constants.ClimberConstants.winchPower);
-    winchRight.set(Constants.ClimberConstants.winchPower);
+  public void climbSlow() {
+    _winch.set(_powerSlow);
   }
 
-  public void climberUp() {
-    winchLeft.set(Constants.ClimberConstants.winchPower);
-    winchRight.set(Constants.ClimberConstants.winchPower);
+  public void setSlowPower(double p) {
+    _powerSlow = p;
+  }
+
+  public void setFastPower(double p) {
+    _powerFast = p;
+  }
+
+  public double getSlowPower() {
+    return _powerSlow;
+  }
+
+  public double getFastPower() {
+    return _powerFast;
+  }
+
+  public void motorOff() {
+    _winch.set(0);
+  }
+
+  public void motorReset() {
+    _winch.set(_powerFast * -1);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    _powerFast = SmartDashboard.getNumber("Climber.Power.Fast", Constants.ClimberConstants.defaultPowerFast);
+    _powerSlow = SmartDashboard.getNumber("Climber.Power.Slow", Constants.ClimberConstants.defaultPowerSlow);
   }
 }

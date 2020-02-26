@@ -7,8 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,14 +17,14 @@ public class Shooter extends SubsystemBase {
   /**
    * Creates a new Shooter.
    */
-  private WPI_TalonSRX shooter = new WPI_TalonSRX(Constants.ShooterConstants.shooterPort);
+  private CANSparkMax shooter = new CANSparkMax(Constants.ShooterConstants.shooterPort, MotorType.kBrushless);
 
   public Shooter() {
 
   }
 
   public void shoot(){
-    shooter.set(ControlMode.PercentOutput,0.5);
+    shooter.set(0.5);
 
   }
 

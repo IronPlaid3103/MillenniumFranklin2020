@@ -7,19 +7,20 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.HopperConstants;
 
 public class Hopper extends SubsystemBase {
   /**
    * Creates a new Hopper.
    */
-  private final WPI_TalonSRX Hopper = new WPI_TalonSRX(7); // 7 is port number
+  private final CANSparkMax Hopper = new CANSparkMax(Constants.HopperConstants.hopperPort, MotorType.kBrushless); // 7 is port number
   // DigitalInput upCount = new DigitalInput(HopperConstants.upCount);
   // DigitalInput downCount = new DigitalInput(HopperConstants.downCount);
   int counter = 0;
@@ -36,11 +37,11 @@ public class Hopper extends SubsystemBase {
   }
 
   public void HopperUp() {
-    Hopper.set(ControlMode.PercentOutput, 0.5);
+    Hopper.set( Constants.HopperConstants.hopperUpPower );
   }
 
   public void HopperDown() {
-    Hopper.set(ControlMode.PercentOutput, -0.5);
+    Hopper.set( Constants.HopperConstants.hopperDownPower );
   }
 
   @Override

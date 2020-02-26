@@ -7,9 +7,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.DriveForward;
@@ -23,7 +21,6 @@ import frc.robot.commands.DriveForward;
  */
 public class Robot extends TimedRobot {
   Command _autonomousCommand;
-  private Preferences _preferences;
   private RobotContainer _robotContainer;
   //private Command _autonomousCommand;
 
@@ -37,15 +34,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
-    _preferences = Preferences.getInstance();
-    _robotContainer = new RobotContainer();
-    _preferences = Preferences.getInstance();
     _autonomousCommand = new DriveForward(_robotContainer.getTank_Drive());
 
-    SmartDashboard.putNumber("Hopper Motor Speed", _preferences.getDouble("Hopper Motor Speed", .5));
-    SmartDashboard.putNumber("Intake Motor Speed", _preferences.getDouble("Intake Motor Speed", .5));
-    SmartDashboard.putNumber("Climber Motor Speed", _preferences.getDouble("Climber Motor Speed", .5));
-    SmartDashboard.putNumber("Shooter Motor Speed", _preferences.getDouble("Shooter Motor Speed", .5));
+    _robotContainer.loadPreferences();
   }
 
   /**
@@ -74,6 +65,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    _robotContainer.savePreferences();
   }
 
   @Override

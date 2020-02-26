@@ -9,7 +9,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -33,7 +35,7 @@ public class RobotContainer {
   private final Climber _climber = new Climber();
   private final Camera _camera = new Camera();
   private final AutonCommand _autonCommand = new AutonCommand();
-
+  private Preferences _preferences = Preferences.getInstance();
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -57,25 +59,25 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     final JoystickButton hopperUp = new JoystickButton(_operator, Constants.JoystickConstants.Y);
-    hopperUp.whenPressed(new HopperUp(_hopper));
+    hopperUp.whileHeld(new HopperUp(_hopper));
 
     final JoystickButton hopperDown = new JoystickButton(_operator, Constants.JoystickConstants.A);
-    hopperDown.whenPressed(new HopperDown(_hopper));
+    hopperDown.whileHeld(new HopperDown(_hopper));
 
     final JoystickButton intakeIn = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT);
-    intakeIn.whenPressed(new IntakeIn(_intake));
+    intakeIn.whileHeld(new IntakeIn(_intake));
 
     final JoystickButton intakeOut = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT);
-    intakeOut.whenPressed(new IntakeOut(_intake));
+    intakeOut.whileHeld(new IntakeOut(_intake));
 
     final JoystickButton shooterShoot = new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT);
-    shooterShoot.whenPressed(new ShooterShoot(_shooter));
+    shooterShoot.whileHeld(new ShooterShoot(_shooter));
 
-    final JoystickButton climberDown = new JoystickButton(_operator, Constants.JoystickConstants.X);
-    climberDown.whenPressed(new ClimberDown(_climber));
 
-    final JoystickButton climberUp = new JoystickButton(_operator, Constants.JoystickConstants.B);
-    climberUp.whenPressed(new ClimberUp(_climber));
+    new JoystickButton(_operator, Constants.JoystickConstants.B).whileHeld(() -> _climber.climbFast());
+    new JoystickButton(_operator, Constants.JoystickConstants.X).whileHeld(() -> _climber.climbSlow());
+    new JoystickButton(_operator, Constants.JoystickConstants.LOGO_LEFT).whileHeld(() -> _climber.motorReset());
+    //TODO: convert to in line work
   }
 
   /**
@@ -87,5 +89,26 @@ public class RobotContainer {
     return _autonCommand;
     // An ExampleCommand will run in autonomous
     //return m_autoCommand;
+  }
+
+  public void loadPreferences() {
+    double climberPowerFast = _preferences.getDouble("Climber.Power.Fast", Constants.ClimberConstants.defaultPowerFast);
+    SmartDashboard.putNumber("Climber Fast", climberPowerFast);
+    _climber.setFastPower(climberPowerFast);
+
+    double climberPowerSlow = _preferences.getDouble("Climber.Power.Slow", Constants.ClimberConstants.defaultPowerSlow);
+    SmartDashboard.putNumber("Climber Slow", climberPowerSlow);
+    _climber.setSlowPower(climberPowerSlow);
+
+    //TODO: Hopper - power
+    //TODO: Intake - power
+    //TODO: Shooter - RPM
+    //TODO: Shooter - kF
+    //TODO: Shooter - kP
+  }
+
+  public void savePreferences() {
+    _preferences.putDouble("Climber.Power.Fast", _climber.getFastPower());
+    _preferences.putDouble("Climber.Power.Slow", _climber.getSlowPower());
   }
 }

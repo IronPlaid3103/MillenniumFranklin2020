@@ -27,23 +27,29 @@ public final class Constants {
 
     public static final class IntakeConstants{
         public static final int intakePort = 1;
+        public static final double intakeInPower = .5;
+        public static final double intakeOutPower = -.5;
     }
 
     public static final class ShooterConstants{
         public static final int shooterPort = 2;
+        public static final double defaultTargetRPM = 5000;
+        public static final double defaultKf = 0;
+        public static final double defaultKp = 0;
     }
 
     public static final class ClimberConstants{
-        public static final int hookLeft = 3;
-        public static final int hookRight = 4;
-        public static final int winchLeft = 9;
-        public static final int winchRight = 10;
-        public static final double winchPower = .5;
+        public static final int winch = 9;
+        public static final double defaultPowerFast = .7;
+        public static final double defaultPowerSlow = .4;
     }
 
     public static final class HopperConstants{
         public static final int upCount = 0;
         public static final int downCount = 1;
+        public static final int hopperPort = 7;
+        public static final double hopperUpPower = .5;
+        public static final double hopperDownPower = -.5;
     }
 
     public static final class JoystickConstants {
