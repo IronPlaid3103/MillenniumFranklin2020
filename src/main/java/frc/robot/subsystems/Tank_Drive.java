@@ -12,12 +12,17 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.*;
 
 public class Tank_Drive extends SubsystemBase {
+  Timer timer = new Timer();
+  private double _distance;
+  private double _power;
   public Tank_Drive() {
 
   }
@@ -65,9 +70,8 @@ public class Tank_Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    SmartDashboard.putNumber("position L", _encoderLeft.getPosition());
-    SmartDashboard.putNumber("position R", _encoderRight.getPosition());
+    _distance = SmartDashboard.getNumber("Auton Distance", Constants.AutonConstants.defaultDriveDistance);
+    _power = SmartDashboard.getNumber("Auton Power", Constants.AutonConstants.defaultAutonPower);
   }
 
   public void limelightDrive(final Joystick driver, final double output) {
@@ -84,6 +88,39 @@ public class Tank_Drive extends SubsystemBase {
   }
 
   public void autoMoveForward() {
-    _drive.arcadeDrive(-0.25, 0);
+    _drive.arcadeDrive(_power, 0);
+  }
+  // public void forwardAuto(double driveDistance) {
+  //   timer.reset();
+  //   timer.start();
+  //   double currentTime = timer.get();
+  //   if (getCurrentPosition() < driveDistance) {
+  //     flDrive.set(1);
+  //     frDrive.set(1);
+  //   }
+  //   else if (getCurrentPosition() >= driveDistance) {
+  //     flDrive.set(0);
+  //     frDrive.set(0);
+  //   }
+  // }
+  // public double getCurrentPosition(){
+  //   double currentDistance = getRightEncoderPosition() * timer.get() / 60 * 6 * Math.PI;
+  //   return currentDistance;
+  // }
+
+  public void setAutonDistance(double driveDistance){
+    _distance = driveDistance;
+  }
+
+  public void setAutonPower(double pow){
+    _power = pow;
+  }
+ 
+  public double getAutonDistance(){
+    return _distance;
+  }
+
+  public double getAutonPower(){
+    return _power;
   }
 }

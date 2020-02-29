@@ -62,7 +62,7 @@ public class Climber extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    _powerFast = SmartDashboard.getNumber("Climber.Power.Fast", Constants.ClimberConstants.defaultPowerFast);
-    _powerSlow = SmartDashboard.getNumber("Climber.Power.Slow", Constants.ClimberConstants.defaultPowerSlow);
+    _powerFast = SmartDashboard.getNumber("Climber Fast", Constants.ClimberConstants.defaultPowerFast);
+    _powerSlow = SmartDashboard.getNumber("Climber Slow", Constants.ClimberConstants.defaultPowerSlow);
   }
 }

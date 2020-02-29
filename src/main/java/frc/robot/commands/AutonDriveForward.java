@@ -8,14 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Tank_Drive;
 
-public class DriveForward extends CommandBase {
+public class AutonDriveForward extends CommandBase {
   /**
    * Creates a new DriveForward.
    */
   private Tank_Drive _tankDrive;
-  public DriveForward(Tank_Drive tankDrive) {
+  public AutonDriveForward(Tank_Drive tankDrive) {
     // Use addRequirements() here to declare subsystem dependencies.
     _tankDrive = tankDrive;
     addRequirements(tankDrive);
@@ -41,6 +42,6 @@ public class DriveForward extends CommandBase {
   @Override
   public boolean isFinished() {
     double position = _tankDrive.getRightEncoderPosition();
-    return (position >= 500);
+    return (position >= _tankDrive.getAutonDistance());
   }
 }

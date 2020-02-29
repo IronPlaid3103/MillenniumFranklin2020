@@ -26,6 +26,8 @@ public class Hopper extends SubsystemBase {
   int counter = 0;
   boolean lastBottomState = false;
   boolean lastTopState = false;
+  double upPower;
+  double downPower;
 
   Counter _counter = new Counter(Counter.Mode.kTwoPulse);
 
@@ -37,11 +39,19 @@ public class Hopper extends SubsystemBase {
   }
 
   public void HopperUp() {
-    Hopper.set( Constants.HopperConstants.hopperUpPower );
+    Hopper.set(upPower);
   }
 
   public void HopperDown() {
-    Hopper.set( Constants.HopperConstants.hopperDownPower );
+    Hopper.set(downPower);
+  }
+
+  public void setUpPower(double power){
+    upPower = power;
+  }
+
+  public void setDownPower( double power){
+    downPower = power;
   }
 
   @Override

@@ -58,26 +58,29 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    final JoystickButton hopperUp = new JoystickButton(_operator, Constants.JoystickConstants.Y);
-    hopperUp.whileHeld(new HopperUp(_hopper));
+    // final JoystickButton hopperUp = new JoystickButton(_operator, Constants.JoystickConstants.Y);
+    // hopperUp.whileHeld(new HopperUp(_hopper));
 
-    final JoystickButton hopperDown = new JoystickButton(_operator, Constants.JoystickConstants.A);
-    hopperDown.whileHeld(new HopperDown(_hopper));
+    // final JoystickButton hopperDown = new JoystickButton(_operator, Constants.JoystickConstants.A);
+    // hopperDown.whileHeld(new HopperDown(_hopper));
 
-    final JoystickButton intakeIn = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT);
-    intakeIn.whileHeld(new IntakeIn(_intake));
+    // final JoystickButton intakeIn = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT);
+    // intakeIn.whileHeld(new IntakeIn(_intake));
 
-    final JoystickButton intakeOut = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT);
-    intakeOut.whileHeld(new IntakeOut(_intake));
+    // final JoystickButton intakeOut = new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT);
+    // intakeOut.whileHeld(new IntakeOut(_intake));
 
-    final JoystickButton shooterShoot = new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT);
-    shooterShoot.whileHeld(new ShooterShoot(_shooter));
-
-
+    // final JoystickButton shooterShoot = new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT);
+    // shooterShoot.whileHeld(new ShooterShoot(_shooter));
+    
     new JoystickButton(_operator, Constants.JoystickConstants.B).whileHeld(() -> _climber.climbFast());
     new JoystickButton(_operator, Constants.JoystickConstants.X).whileHeld(() -> _climber.climbSlow());
     new JoystickButton(_operator, Constants.JoystickConstants.LOGO_LEFT).whileHeld(() -> _climber.motorReset());
-    //TODO: convert to in line work
+    new JoystickButton(_operator, Constants.JoystickConstants.Y).whileHeld(() -> _hopper.HopperUp());
+    new JoystickButton(_operator, Constants.JoystickConstants.A).whileHeld(() -> _hopper.HopperDown());
+    new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _intake.takeIntake());
+    new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT).whileHeld(() -> _intake.letGoIntake());
+    new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _shooter.shoot());
   }
 
   /**
@@ -100,8 +103,30 @@ public class RobotContainer {
     SmartDashboard.putNumber("Climber Slow", climberPowerSlow);
     _climber.setSlowPower(climberPowerSlow);
 
-    //TODO: Hopper - power
-    //TODO: Intake - power
+    double hopperDownPower = _preferences.getDouble("Hopper.Down.Power", Constants.HopperConstants.hopperDownPower);
+    SmartDashboard.putNumber("Hopper Down", hopperDownPower);
+    _hopper.setDownPower(hopperDownPower);
+
+    double hopperUpPower = _preferences.getDouble("Hopper.Up.Power", Constants.HopperConstants.hopperUpPower);
+    SmartDashboard.putNumber("Hopper Up", hopperUpPower);
+    _hopper.setUpPower(hopperUpPower);
+
+    double intakeInPower = _preferences.getDouble("Intake.In.Power", Constants.IntakeConstants.intakeInPower);
+    SmartDashboard.putNumber("Intake In", intakeInPower);
+    _intake.setTakeIn(intakeInPower);
+
+    double intakeOutPower = _preferences.getDouble("Intake.Out.Power", Constants.IntakeConstants.intakeOutPower);
+    SmartDashboard.putNumber("Intake Out", intakeOutPower);
+    _intake.setLetGo(intakeOutPower);
+
+    double driveDistance = _preferences.getDouble("Auton.Distance", Constants.AutonConstants.defaultDriveDistance);
+    SmartDashboard.putNumber("Auton Distance", driveDistance);
+    _tank_Drive.setAutonDistance(driveDistance);
+
+    double aDrivePower = _preferences.getDouble("Auton.Power", Constants.AutonConstants.defaultAutonPower);
+    SmartDashboard.putNumber("Auton Power", aDrivePower);
+    _tank_Drive.setAutonDistance(aDrivePower);
+
     //TODO: Shooter - RPM
     //TODO: Shooter - kF
     //TODO: Shooter - kP
@@ -110,5 +135,6 @@ public class RobotContainer {
   public void savePreferences() {
     _preferences.putDouble("Climber.Power.Fast", _climber.getFastPower());
     _preferences.putDouble("Climber.Power.Slow", _climber.getSlowPower());
+    //TODO: make the rest 
   }
 }

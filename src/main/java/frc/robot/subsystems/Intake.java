@@ -17,20 +17,29 @@ public class Intake extends SubsystemBase {
   /**
    * Creates a new Intake.
    */
-  private WPI_TalonSRX intake = new WPI_TalonSRX(Constants.IntakeConstants.intakePort); 
+  private WPI_TalonSRX intake = new WPI_TalonSRX(Constants.IntakeConstants.intakePort);
+  double _takeInPower;
+  double _letGoPower; 
   public Intake() {
     
   }
 
   public void takeIntake(){
-    intake.set(ControlMode.PercentOutput, Constants.IntakeConstants.intakeInPower);
+    intake.set(ControlMode.PercentOutput, _takeInPower);
   }
 
 
   public void letGoIntake() {
-    intake.set(ControlMode.PercentOutput, Constants.IntakeConstants.intakeOutPower);
+    intake.set(ControlMode.PercentOutput, _letGoPower);
   }
 
+  public void setTakeIn(double power){
+    _takeInPower = power;
+  }
+
+  public void setLetGo(double power){
+    _letGoPower = power;
+  }
 
   @Override
   public void periodic() {

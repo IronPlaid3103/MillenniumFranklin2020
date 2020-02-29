@@ -25,6 +25,11 @@ public final class Constants {
         public static final int blDrive = 4;
     }
 
+    public static final class AutonConstants{
+        public static final double defaultAutonPower = .25;
+        public static final int defaultDriveDistance = 3;
+    }
+
     public static final class IntakeConstants{
         public static final int intakePort = 1;
         public static final double intakeInPower = .5;
