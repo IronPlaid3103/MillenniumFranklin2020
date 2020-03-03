@@ -29,13 +29,14 @@ public class RobotContainer {
   private final Tank_Drive _tank_Drive = new Tank_Drive();
   private final Joystick _driver = new Joystick(0);
   private final Joystick _operator = new Joystick(1);
-  private final Hopper _hopper = new Hopper();
-  private final Intake _intake = new Intake();
-  private final Shooter _shooter = new Shooter();
+  // private final Hopper _hopper = new Hopper();
+  // private final Intake _intake = new Intake();
+  // private final Shooter _shooter = new Shooter();
   private final Climber _climber = new Climber();
   private final Camera _camera = new Camera();
-  private final AutonCommand _autonCommand = new AutonCommand();
+  //private final AutonCommand _autonCommand = new AutonCommand();
   private Preferences _preferences = Preferences.getInstance();
+  private final AutonDriveForward _autonCommand = new AutonDriveForward(_tank_Drive);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -73,14 +74,23 @@ public class RobotContainer {
     // final JoystickButton shooterShoot = new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT);
     // shooterShoot.whileHeld(new ShooterShoot(_shooter));
     
-    new JoystickButton(_operator, Constants.JoystickConstants.B).whileHeld(() -> _climber.climbFast());
-    new JoystickButton(_operator, Constants.JoystickConstants.X).whileHeld(() -> _climber.climbSlow());
-    new JoystickButton(_operator, Constants.JoystickConstants.LOGO_LEFT).whileHeld(() -> _climber.motorReset());
-    new JoystickButton(_operator, Constants.JoystickConstants.Y).whileHeld(() -> _hopper.HopperUp());
-    new JoystickButton(_operator, Constants.JoystickConstants.A).whileHeld(() -> _hopper.HopperDown());
-    new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _intake.takeIntake());
-    new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT).whileHeld(() -> _intake.letGoIntake());
-    new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _shooter.shoot());
+    new JoystickButton(_operator, Constants.JoystickConstants.B)
+      .whileHeld(() -> _climber.climbFast())
+      .whenReleased(() -> _climber.motorOff());
+    new JoystickButton(_operator, Constants.JoystickConstants.X)
+      .whileHeld(() -> _climber.climbSlow())
+      .whenReleased(() -> _climber.motorOff());
+    new JoystickButton(_operator, Constants.JoystickConstants.LOGO_LEFT)
+      .whileHeld(() -> _climber.motorResetSlow())
+      .whenReleased(() -> _climber.motorOff());
+    new JoystickButton(_operator, Constants.JoystickConstants.LOGO_RIGHT)
+      .whileHeld(() -> _climber.motorResetFast())
+      .whenReleased(() -> _climber.motorOff());
+  //   new JoystickButton(_operator, Constants.JoystickConstants.Y).whileHeld(() -> _hopper.HopperUp());
+  //   new JoystickButton(_operator, Constants.JoystickConstants.A).whileHeld(() -> _hopper.HopperDown());
+  //   new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _intake.takeIntake());
+  //   new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_LEFT).whileHeld(() -> _intake.letGoIntake());
+  //   new JoystickButton(_driver, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _shooter.shoot());
   }
 
   /**
@@ -103,21 +113,21 @@ public class RobotContainer {
     SmartDashboard.putNumber("Climber Slow", climberPowerSlow);
     _climber.setSlowPower(climberPowerSlow);
 
-    double hopperDownPower = _preferences.getDouble("Hopper.Down.Power", Constants.HopperConstants.hopperDownPower);
-    SmartDashboard.putNumber("Hopper Down", hopperDownPower);
-    _hopper.setDownPower(hopperDownPower);
+    // double hopperDownPower = _preferences.getDouble("Hopper.Down.Power", Constants.HopperConstants.hopperDownPower);
+    // SmartDashboard.putNumber("Hopper Down", hopperDownPower);
+    // _hopper.setDownPower(hopperDownPower);
 
-    double hopperUpPower = _preferences.getDouble("Hopper.Up.Power", Constants.HopperConstants.hopperUpPower);
-    SmartDashboard.putNumber("Hopper Up", hopperUpPower);
-    _hopper.setUpPower(hopperUpPower);
+    // double hopperUpPower = _preferences.getDouble("Hopper.Up.Power", Constants.HopperConstants.hopperUpPower);
+    // SmartDashboard.putNumber("Hopper Up", hopperUpPower);
+    // _hopper.setUpPower(hopperUpPower);
 
-    double intakeInPower = _preferences.getDouble("Intake.In.Power", Constants.IntakeConstants.intakeInPower);
-    SmartDashboard.putNumber("Intake In", intakeInPower);
-    _intake.setTakeIn(intakeInPower);
+    // double intakeInPower = _preferences.getDouble("Intake.In.Power", Constants.IntakeConstants.intakeInPower);
+    // SmartDashboard.putNumber("Intake In", intakeInPower);
+    // _intake.setTakeIn(intakeInPower);
 
-    double intakeOutPower = _preferences.getDouble("Intake.Out.Power", Constants.IntakeConstants.intakeOutPower);
-    SmartDashboard.putNumber("Intake Out", intakeOutPower);
-    _intake.setLetGo(intakeOutPower);
+    // double intakeOutPower = _preferences.getDouble("Intake.Out.Power", Constants.IntakeConstants.intakeOutPower);
+    // SmartDashboard.putNumber("Intake Out", intakeOutPower);
+    // _intake.setLetGo(intakeOutPower);
 
     double driveDistance = _preferences.getDouble("Auton.Distance", Constants.AutonConstants.defaultDriveDistance);
     SmartDashboard.putNumber("Auton Distance", driveDistance);
@@ -125,7 +135,7 @@ public class RobotContainer {
 
     double aDrivePower = _preferences.getDouble("Auton.Power", Constants.AutonConstants.defaultAutonPower);
     SmartDashboard.putNumber("Auton Power", aDrivePower);
-    _tank_Drive.setAutonDistance(aDrivePower);
+    _tank_Drive.setAutonPower(aDrivePower);
 
     //TODO: Shooter - RPM
     //TODO: Shooter - kF
@@ -135,6 +145,8 @@ public class RobotContainer {
   public void savePreferences() {
     _preferences.putDouble("Climber.Power.Fast", _climber.getFastPower());
     _preferences.putDouble("Climber.Power.Slow", _climber.getSlowPower());
-    //TODO: make the rest 
+    _preferences.putDouble("Auton.Distance", _tank_Drive.getAutonDistance());
+    _preferences.putDouble("Auton.Power", _tank_Drive.getAutonPower());
+    //TODO: save preferences for auton
   }
 }

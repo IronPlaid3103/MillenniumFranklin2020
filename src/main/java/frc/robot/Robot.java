@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.
+    _robotContainer = new RobotContainer();
     _autonomousCommand = new AutonDriveForward(_robotContainer.getTank_Drive());
 
     _robotContainer.loadPreferences();
@@ -91,9 +92,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    //ScheduleCommand(m_autonomousCommand);
-    //TODO: Fix how to do this
-    CommandScheduler.getInstance().run();
+  
   }
 
   @Override

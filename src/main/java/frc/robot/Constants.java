@@ -23,6 +23,7 @@ public final class Constants {
         public static final int flDrive = 2;
         public static final int brDrive = 3;
         public static final int blDrive = 4;
+        public static final double deadband = 0.1;
     }
 
     public static final class AutonConstants{
@@ -31,7 +32,7 @@ public final class Constants {
     }
 
     public static final class IntakeConstants{
-        public static final int intakePort = 1;
+        public static final int intakePort = 5;
         public static final double intakeInPower = .5;
         public static final double intakeOutPower = -.5;
     }
@@ -44,7 +45,7 @@ public final class Constants {
     }
 
     public static final class ClimberConstants{
-        public static final int winch = 9;
+        public static final int winch = 1;
         public static final double defaultPowerFast = .7;
         public static final double defaultPowerSlow = .4;
     }

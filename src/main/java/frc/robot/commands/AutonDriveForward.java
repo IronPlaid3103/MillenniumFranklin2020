@@ -41,7 +41,7 @@ public class AutonDriveForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double position = _tankDrive.getRightEncoderPosition();
+    double position = _tankDrive.getLeftEncoderPosition();
     return (position >= _tankDrive.getAutonDistance());
   }
 }

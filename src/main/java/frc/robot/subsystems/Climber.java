@@ -11,7 +11,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -24,7 +23,7 @@ public class Climber extends SubsystemBase {
   private double _powerSlow = Constants.ClimberConstants.defaultPowerSlow;
 
   public Climber() {
-    setDefaultCommand(new InstantCommand(this::motorOff));
+    // setDefaultCommand(new InstantCommand(this::motorOff));
   }
 
   public void climbFast() {
@@ -55,8 +54,12 @@ public class Climber extends SubsystemBase {
     _winch.set(0);
   }
 
-  public void motorReset() {
+  public void motorResetFast() {
     _winch.set(_powerFast * -1);
+  }
+
+  public void motorResetSlow() {
+    _winch.set(_powerSlow * -1);
   }
 
   @Override

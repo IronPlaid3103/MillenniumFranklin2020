@@ -20,9 +20,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.*;
 
 public class Tank_Drive extends SubsystemBase {
-  Timer timer = new Timer();
-  private double _distance;
-  private double _power;
+
   public Tank_Drive() {
 
   }
@@ -37,8 +35,14 @@ public class Tank_Drive extends SubsystemBase {
 
   private final DifferentialDrive _drive = new DifferentialDrive(flDrive, frDrive);
 
-  private CANEncoder _encoderLeft = flDrive.getEncoder();
-  private CANEncoder _encoderRight = frDrive.getEncoder();
+  private final CANEncoder _encoderLeft = flDrive.getEncoder();
+  private final CANEncoder _encoderRight = frDrive.getEncoder();
+
+  Timer timer = new Timer();
+  private double _distance;
+  private double _power;
+
+  private final double _deadband = Constants.DriveConstants.deadband;
 
   public void configDrive() {
     blDrive.follow(flDrive);
@@ -58,6 +62,8 @@ public class Tank_Drive extends SubsystemBase {
 
     // _encoderRight.setPositionConversionFactor(25);
     _encoderRight.setPosition(0);
+
+    _drive.setDeadband(_deadband);
   }
 
   public void teleopDrive(final Joystick driveControl) {
@@ -65,7 +71,10 @@ public class Tank_Drive extends SubsystemBase {
     final double turn = driveControl.getRawAxis(JoystickConstants.RIGHT_STICK_X);
 
     // _drive.arcadeDrive(forward, turn);
-    _drive.curvatureDrive(forward, turn, Math.abs(forward)<= .02); //reccomended instead of arcade drive to make turns wider
+    _drive.curvatureDrive(forward, turn, Math.abs(forward) <= _deadband);
+
+  
+    
   }
 
   @Override
@@ -84,35 +93,36 @@ public class Tank_Drive extends SubsystemBase {
   }
 
   public double getRightEncoderPosition() {
-    return _encoderRight.getPosition();
+    return _encoderRight.getPosition() * -1;
   }
 
   public void autoMoveForward() {
     _drive.arcadeDrive(_power, 0);
   }
   // public void forwardAuto(double driveDistance) {
-  //   timer.reset();
-  //   timer.start();
-  //   double currentTime = timer.get();
-  //   if (getCurrentPosition() < driveDistance) {
-  //     flDrive.set(1);
-  //     frDrive.set(1);
-  //   }
-  //   else if (getCurrentPosition() >= driveDistance) {
-  //     flDrive.set(0);
-  //     frDrive.set(0);
-  //   }
+  // timer.reset();
+  // timer.start();
+  // double currentTime = timer.get();
+  // if (getCurrentPosition() < driveDistance) {
+  // flDrive.set(1);
+  // frDrive.set(1);
+  // }
+  // else if (getCurrentPosition() >= driveDistance) {
+  // flDrive.set(0);
+  // frDrive.set(0);
+  // }
   // }
   // public double getCurrentPosition(){
-  //   double currentDistance = getRightEncoderPosition() * timer.get() / 60 * 6 * Math.PI;
-  //   return currentDistance;
+  // double currentDistance = getRightEncoderPosition() * timer.get() / 60 * 6 *
+  // Math.PI;
+  // return currentDistance;
   // }
 
-  public void setAutonDistance(double driveDistance){
+  public void setAutonDistance(double driveDistance) {
     _distance = driveDistance;
   }
 
-  public void setAutonPower(double pow){
+  public void setAutonPower(double pow) {
     _power = pow;
   }
  
