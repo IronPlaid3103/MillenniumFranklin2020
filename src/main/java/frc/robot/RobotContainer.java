@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.JoystickConstants;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -86,6 +87,9 @@ public class RobotContainer {
     new JoystickButton(_operator, Constants.JoystickConstants.LOGO_RIGHT)
       .whileHeld(() -> _climber.motorResetFast())
       .whenReleased(() -> _climber.motorOff());
+    new JoystickButton(_operator, JoystickConstants.BUMPER_LEFT)
+      .whileHeld(() -> _climber.raiseArms())
+      .whenReleased(() -> _climber.armsOff());
   //   new JoystickButton(_operator, Constants.JoystickConstants.Y).whileHeld(() -> _hopper.HopperUp());
   //   new JoystickButton(_operator, Constants.JoystickConstants.A).whileHeld(() -> _hopper.HopperDown());
   //   new JoystickButton(_operator, Constants.JoystickConstants.BUMPER_RIGHT).whileHeld(() -> _intake.takeIntake());

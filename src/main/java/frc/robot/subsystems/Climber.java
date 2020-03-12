@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -19,48 +21,56 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
   private final CANSparkMax _winch = new CANSparkMax(Constants.ClimberConstants.winch, MotorType.kBrushless);
+  private final TalonSRX _sTWinch = new TalonSRX(Constants.ClimberConstants.sTWinch);
   private double _powerFast = Constants.ClimberConstants.defaultPowerFast;
   private double _powerSlow = Constants.ClimberConstants.defaultPowerSlow;
 
   public Climber() {
     // setDefaultCommand(new InstantCommand(this::motorOff));
   }
+    public void raiseArms(){
+      _sTWinch.set(ControlMode.PercentOutput, .5);
+    }
 
-  public void climbFast() {
-    _winch.set(_powerFast);
-  }
+    public void armsOff(){
+      _sTWinch.set(ControlMode.PercentOutput, 0);
+    }
 
-  public void climbSlow() {
-    _winch.set(_powerSlow);
-  }
+    public void climbFast() {
+      _winch.set(_powerFast);
+    }
 
-  public void setSlowPower(double p) {
-    _powerSlow = p;
-  }
+    public void climbSlow() {
+      _winch.set(_powerSlow);
+    }
 
-  public void setFastPower(double p) {
-    _powerFast = p;
-  }
+    public void setSlowPower(final double p) {
+      _powerSlow = p;
+    }
 
-  public double getSlowPower() {
-    return _powerSlow;
-  }
+    public void setFastPower(final double p) {
+      _powerFast = p;
+    }
 
-  public double getFastPower() {
-    return _powerFast;
-  }
+    public double getSlowPower() {
+      return _powerSlow;
+    }
 
-  public void motorOff() {
-    _winch.set(0);
-  }
+    public double getFastPower() {
+      return _powerFast;
+    }
 
-  public void motorResetFast() {
-    _winch.set(_powerFast * -1);
-  }
+    public void motorOff() {
+      _winch.set(0);
+    }
 
-  public void motorResetSlow() {
-    _winch.set(_powerSlow * -1);
-  }
+    public void motorResetFast() {
+      _winch.set(_powerFast * -1);
+    }
+
+    public void motorResetSlow() {
+      _winch.set(_powerSlow * -1);
+    }
 
   @Override
   public void periodic() {

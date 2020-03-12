@@ -68,7 +68,8 @@ public class Tank_Drive extends SubsystemBase {
 
   public void teleopDrive(final Joystick driveControl) {
     final double forward = driveControl.getRawAxis(JoystickConstants.LEFT_STICK_Y);
-    final double turn = driveControl.getRawAxis(JoystickConstants.RIGHT_STICK_X);
+    double turn = driveControl.getRawAxis(JoystickConstants.RIGHT_STICK_X);
+    turn = turn*-1;
 
     // _drive.arcadeDrive(forward, turn);
     _drive.curvatureDrive(forward, turn, Math.abs(forward) <= _deadband);

@@ -45,9 +45,10 @@ public final class Constants {
     }
 
     public static final class ClimberConstants{
-        public static final int winch = 1;
+        public static final int winch = 5;
         public static final double defaultPowerFast = .7;
         public static final double defaultPowerSlow = .4;
+        public static final int sTWinch = 6;
     }
 
     public static final class HopperConstants{
